@@ -1,13 +1,13 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
-import { QUERIES, WEIGHTS } from '../../constants';
-import Logo from '../Logo';
-import Icon from '../Icon';
-import UnstyledButton from '../UnstyledButton';
-import SuperHeader from '../SuperHeader';
-import MobileMenu from '../MobileMenu';
-import VisuallyHidden from '../VisuallyHidden';
+import { QUERIES, WEIGHTS } from "../../constants";
+import Logo from "../Logo";
+import Icon from "../Icon";
+import UnstyledButton from "../UnstyledButton";
+import SuperHeader from "../SuperHeader";
+import MobileMenu from "../MobileMenu";
+import VisuallyHidden from "../VisuallyHidden";
 
 const Header = () => {
   const [showMobileMenu, setShowMobileMenu] = React.useState(false);
@@ -20,12 +20,30 @@ const Header = () => {
           <Logo />
         </LogoWrapper>
         <DesktopNav>
-          <NavLink href="/sale">Sale</NavLink>
-          <NavLink href="/new">New&nbsp;Releases</NavLink>
-          <NavLink href="/men">Men</NavLink>
-          <NavLink href="/women">Women</NavLink>
-          <NavLink href="/kids">Kids</NavLink>
-          <NavLink href="/collections">Collections</NavLink>
+          <NavLink href="/sale">
+            <NonHovered>Sale</NonHovered>
+            <Hovered>Sale</Hovered>
+          </NavLink>
+          <NavLink href="/new">
+            <NonHovered>New&nbsp;Releases</NonHovered>
+            <Hovered>New&nbsp;Releases</Hovered>
+          </NavLink>
+          <NavLink href="/men">
+            <NonHovered>Men</NonHovered>
+            <Hovered>Men</Hovered>
+          </NavLink>
+          <NavLink href="/women">
+            <NonHovered>Women</NonHovered>
+            <Hovered>Women</Hovered>
+          </NavLink>
+          <NavLink href="/kids">
+            <NonHovered>Kids</NonHovered>
+            <Hovered>Kids</Hovered>
+          </NavLink>
+          <NavLink href="/collections">
+            <NonHovered>Collections</NonHovered>
+            <Hovered>Collections</Hovered>
+          </NavLink>
         </DesktopNav>
         <MobileActions>
           <ShoppingBagButton>
@@ -114,16 +132,36 @@ const Filler = styled.div`
   }
 `;
 
+const TransitionElem = styled.span`
+  display: inline-block;
+  transition: transform 300ms;
+`;
+
+const NonHovered = styled(TransitionElem)``;
+
+const Hovered = styled(TransitionElem)`
+  position: absolute;
+  left: 0;
+  top: 1.5em;
+  font-weight: ${WEIGHTS.bold};
+`;
+
 const NavLink = styled.a`
+  position: relative;
   font-size: 1.125rem;
   text-transform: uppercase;
   text-decoration: none;
   color: var(--color-gray-900);
   font-weight: ${WEIGHTS.medium};
+  overflow: hidden;
+  will-change: transform;
 
   &:first-of-type {
     color: var(--color-secondary);
   }
-`;
 
+  &:hover ${TransitionElem} {
+    transform: translateY(-1.5em);
+  }
+`;
 export default Header;
